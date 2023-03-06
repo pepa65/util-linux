@@ -1036,8 +1036,10 @@ static char *device_get_data(
 		break;
 	case COL_START:
 		ul_path_read_string(dev->sysfs, &str, "start");
-		if (sortdata)
+		if (sortdata) {
+			lsblk->force_tree_order = 1;
 			str2u64(str, sortdata);
+		}
 		break;
 	case COL_STATE:
 		if (!device_is_partition(dev) && !dev->dm_name)
